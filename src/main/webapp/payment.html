@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>payment</title>
+</head>
+
+<body>
+	<form action="/jmaster/PaymentServlet" method="post">
+		支払方法選択<br>
+		<input type="radio" name="pay" value="card">クレジットカード
+		<input type="radio" name="pay" value="bank">銀行
+		<input type="radio" name="pay" value="cash">代引き
+		<br><br>
+		アンケートに答えてください<br>
+		<input type="checkbox" name="site" value="fb">facebook
+		<input type="checkbox" name="site" value="x">X
+		<input type="checkbox" name="site" value="yt">YouTube
+
+		<button>送信</button>
+	</form>
+</body>
+
+</html>
