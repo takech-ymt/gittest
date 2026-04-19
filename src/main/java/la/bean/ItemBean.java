@@ -13,7 +13,7 @@ public class ItemBean implements Serializable {
 		this.price = price;
 	}
 
-	public ItemBean() {
+    }
 
 	}
 
