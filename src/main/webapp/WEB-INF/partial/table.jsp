@@ -1,0 +1,15 @@
+<table border="1">
+    <tr>
+        <td>NO</td>
+        <td>商品名</td>
+        <td>値段</td>
+    </tr>
+
+    <c:forEach items="${items}" var="item">
+        <tr>
+            <td>${item.code}</td>
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+        </tr>
+    </c:forEach>
+</table>

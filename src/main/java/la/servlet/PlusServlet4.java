@@ -24,7 +24,7 @@ public class PlusServlet4 extends HttpServlet {
         int answer = i1 + i2;
 
         // リクエストスコープに必要なデータを入れる
-        request.setAttribute("data1", Integer.valueOf(i1));
+        request.setAttribute("data1",1);
         request.setAttribute("data2", Integer.valueOf(i2));
         request.setAttribute("answer", Integer.valueOf(answer));
 

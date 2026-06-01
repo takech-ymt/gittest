@@ -10,32 +10,26 @@ import java.util.List;
 
 import la.bean.ItemBean;
 
-public class ItemDAO2 {
+public class ItemDAO2 extends Dao {
+	public ItemDAO2() throws DAOException {
+		super();
+	}
+
 	// URL、ユーザ名、パスワードの準備
 	private String url = "jdbc:postgresql:sample";
 	private String user = "student";
 	private String pass = "himitu";
-	
-	public ItemDAO2() throws DAOException {
-		try {
-			// JDBCドライバの登録
-			Class.forName("org.postgresql.Driver");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new DAOException("ドライバの登録に失敗しました。");
-		}
-	}
 
 	public List<ItemBean> findAll() throws DAOException {
 		// SQL文の作成
 		String sql = "SELECT * FROM item";
 
 		try (// データベースへの接続
-			 Connection con = DriverManager.getConnection(url, user, pass);
-			 // PreparedStatementオブジェクトの取得
-			 PreparedStatement st = con.prepareStatement(sql);
-			 // SQLの実行
-			 ResultSet rs = st.executeQuery();) {
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);
+				// SQLの実行
+				ResultSet rs = st.executeQuery();) {
 			// 結果の取得
 			List<ItemBean> list = new ArrayList<ItemBean>();
 			while (rs.next()) {
@@ -61,13 +55,13 @@ public class ItemDAO2 {
 			sql = "SELECT * FROM item ORDER BY price";
 		else
 			sql = "SELECT * FROM item ORDER BY price desc";
-		
+
 		try (// データベースへの接続
-			 Connection con = DriverManager.getConnection(url, user, pass);
-			 // PreparedStatementオブジェクトの取得
-			 PreparedStatement st = con.prepareStatement(sql);
-			 // SQLの実行
-			 ResultSet rs = st.executeQuery();) {
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);
+				// SQLの実行
+				ResultSet rs = st.executeQuery();) {
 			// 結果の取得
 			List<ItemBean> list = new ArrayList<ItemBean>();
 			while (rs.next()) {
@@ -82,17 +76,17 @@ public class ItemDAO2 {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
-		} 
+		}
 	}
 
 	public int addItem(String name, int price) throws DAOException {
 		// SQL文の作成
 		String sql = "INSERT INTO item(name, price) VALUES(?, ?)";
-		
+
 		try (// データベースへの接続
-			 Connection con = DriverManager.getConnection(url, user, pass);
-			 // PreparedStatementオブジェクトの取得
-			 PreparedStatement st = con.prepareStatement(sql);) {
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
 			// 商品名と値段の指定
 			st.setString(1, name);
 			st.setInt(2, price);
@@ -102,22 +96,22 @@ public class ItemDAO2 {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
-		} 
+		}
 	}
 
 	public List<ItemBean> findByPrice(int lePrice) throws DAOException {
 		// SQL文の作成
 		String sql = "SELECT * FROM item WHERE price <= ?";
-		
+
 		try (// データベースへの接続
-			 Connection con = DriverManager.getConnection(url, user, pass);
-			 // PreparedStatementオブジェクトの取得
-			 PreparedStatement st = con.prepareStatement(sql);) {
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
 			// 値段のセット
 			st.setInt(1, lePrice);
-			
+
 			try (// SQLの実行
-				 ResultSet rs = st.executeQuery();) {
+					ResultSet rs = st.executeQuery();) {
 				// 結果の取得
 				List<ItemBean> list = new ArrayList<ItemBean>();
 				while (rs.next()) {
@@ -142,11 +136,11 @@ public class ItemDAO2 {
 	public int deleteByPrimaryKey(int key) throws DAOException {
 		// SQL文の作成
 		String sql = "DELETE FROM item WHERE code = ?";
-		
+
 		try (// データベースへの接続
-			 Connection con = DriverManager.getConnection(url, user, pass);
-			 // PreparedStatementオブジェクトの取得
-			 PreparedStatement st = con.prepareStatement(sql);) {
+				Connection con = DriverManager.getConnection(url, user, pass);
+				// PreparedStatementオブジェクトの取得
+				PreparedStatement st = con.prepareStatement(sql);) {
 			// 主キーの指定
 			st.setInt(1, key);
 			// SQLの実行
@@ -155,6 +149,6 @@ public class ItemDAO2 {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DAOException("レコードの操作に失敗しました。");
-		} 
+		}
 	}
 }
